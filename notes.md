@@ -12,5 +12,14 @@ https://res.cloudinary.com/fergusdev/image/upload/v1610993960/medium-rss/Selecti
 What is RSS?
 xml
 
+https://stackoverflow.com/questions/32601424/render-raw-html-in-response-with-express
+
+
+https://www.npmjs.com/package/rss-parser
+
 
 npm install --save rss-parser
+
+http://138.68.23.63:4050/medium
+
+https://medium.com/@dtkatz/3-ways-to-fix-the-cors-error-and-how-access-control-allow-origin-works-d97d55946d9
