@@ -5,15 +5,15 @@ import Parser from 'rss-parser'
 
 function App() {
 
-  const parser = new Parser()
   const [posts, setPosts] = useState([])
 
   useEffect(() => {
 
-    const fetchPosts = async () => {
-      let feed = await parser.parseURL('http://138.68.23.63:4050/medium')
-      
-      let blogPosts = feed.items.reduce((acc, item) => {
+    const parser = new Parser()
+
+    const filterNonPosts = (items, limit) => {
+
+      let blogPosts = items.reduce((acc, item) => {
         
         let blogPost
 
@@ -36,7 +36,19 @@ function App() {
         return acc
       }, [])
 
-      if(blogPosts.length > 4) setPosts(blogPosts.slice(0, 5))
+      if(blogPosts.length > 4) {
+        return blogPosts.slice(0, limit)
+      }
+      else {
+        return blogPosts
+      }
+
+    }
+
+    const fetchPosts = async () => {
+      const feed = await parser.parseURL('http://138.68.23.63:4050/medium')
+      const blogPosts = filterNonPosts(feed.items, 5)
+      setPosts(blogPosts)
     }
 
     fetchPosts()
