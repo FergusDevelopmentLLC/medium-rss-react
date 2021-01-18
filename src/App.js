@@ -24,10 +24,10 @@ function App() {
           blogPost.pubDate = item["pubDate"]
 
           const content = new DOMParser().parseFromString(item["content:encoded"], 'text/html')
-          let subtitle = content.querySelector('p').textContent
+          const subtitle = content.querySelector('p').textContent
           if(subtitle.length < 100) blogPost.subtitle = subtitle
 
-          let image = content.querySelector('figure').querySelector('img')
+          const image = content.querySelector('figure').querySelector('img')
           if(image) blogPost.imgUrl = image.src
         }
 
@@ -46,7 +46,8 @@ function App() {
     }
 
     const fetchPosts = async () => {
-      const feed = await parser.parseURL('http://138.68.23.63:4050/medium')
+      //http://138.68.23.63:4050/medium
+      const feed = await parser.parseURL('https://cors-anywhere.herokuapp.com/https://medium.com/feed/@will-carter')
       const blogPosts = filterNonPosts(feed.items, 5)
       setPosts(blogPosts)
     }
