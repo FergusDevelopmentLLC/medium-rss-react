@@ -11,7 +11,7 @@ function App() {
 
     const parser = new Parser()
 
-    const filterNonPosts = (items, limit) => {
+    const filterPosts = (items, limit) => {
 
       let blogPosts = items.reduce((acc, item) => {
         
@@ -46,9 +46,9 @@ function App() {
     }
 
     const fetchPosts = async () => {
-      //http://138.68.23.63:4050/medium
-      const feed = await parser.parseURL('https://cors-anywhere.herokuapp.com/https://medium.com/feed/@will-carter')
-      const blogPosts = filterNonPosts(feed.items, 5)
+      const url = 'http://138.68.23.63:4050/medium'
+      const feed = await parser.parseURL(url)
+      const blogPosts = filterPosts(feed.items, 5)
       setPosts(blogPosts)
     }
 
@@ -60,7 +60,7 @@ function App() {
     <div className="home">
       <main></main>
       <aside className="left">
-      <FeaturedPosts posts={posts} />
+      <FeaturedPosts posts={ posts } />
       </aside>
     </div>
   )
